@@ -46,10 +46,13 @@ define([
     self.router = Router.rootInstance;
     self.router.configure({
       dashboard: { label: "Dashboard" },
+      admin_dashboard: {label: "Admin_dashboard"},
       register: { label: "Register" },
       submission: { label: "Submission" },
-      login: { label: "Login", isDefault: true },
-      logout: { label: "Logout" }
+      login: { label: "Login", isD
+      profile: { label: "User Profile" },
+      password_reset: {label: "Reset password"}
+  
     });
     Router.defaults["urlAdapter"] = new Router.urlParamAdapter();
 
@@ -74,23 +77,15 @@ define([
     var navData = [
       {
         name: "Login",
-        id: "login",
-        loggedIn: false
+        id: "login"
       },
       {
         name: "Register",
-        id: "register",
-        loggedIn: false
+        id: "register"
       },
       {
         name: "Dashboard",
-        id: "dashboard",
-        loggedIn: true
-      },
-      {
-        id: "logout",
-        loggedIn: true,
-        iconClass: "fa fa-power-off"
+        id: "dashboard"
       }
     ];
     self.navDataProvider = new ArrayDataProvider(navData, {
@@ -112,48 +107,17 @@ define([
       return OffcanvasUtils.toggle(self.drawerParams);
     };
     // Add a close listener so we can move focus back to the toggle button when the drawer closes
-    document
-      .getElementById("navDrawer")
-      .addEventListener(
-        "ojclose",
-        document.getElementById("drawerToggleButton").focus()
-      );
+    // document
+    //   .getElementById("navDrawer")
+    //   .addEventListener(
+    //     "ojclose",
+    //     document.getElementById("drawerToggleButton").focus()
+    //   );
 
     // Header
     // Application Name used in Branding Area
     self.appName = ko.observable("OJET Team 20");
     self.isLoggedIn = ko.observable(false);
-
-    // init database
-    var dbReq = window.indexedDB.open("ojetDb", 3);
-    (function initDb() {
-      if (!window.indexedDB) {
-        console.log(
-          "Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available."
-        );
-      }
-      dbReq.onsuccess = function(event) {
-        db = dbReq.result;
-      };
-      dbReq.onupgradeneeded = function(event) {
-        // Save the IDBDatabase interface
-        var db = event.target.result;
-        self.db = db;
-        // Create an objectStore for this database
-        let userTable;
-        if (!db.objectStoreNames.contains("user")) {
-          userTable = db.createObjectStore("user", {
-            keyPath: "id",
-            autoIncrement: true
-          });
-          userTable.createIndex("uname", "uname", { unique: true });
-          userTable.createIndex("email", "email", { unique: true });
-        }
-        userTable.transaction.oncomplete = function() {
-          console.log("database created successfully");
-        };
-      };
-    })();
 
     // Footer
     function footerLink(name, id, linkTarget) {
@@ -192,4 +156,3 @@ define([
 
   return new ControllerViewModel();
 });
-
