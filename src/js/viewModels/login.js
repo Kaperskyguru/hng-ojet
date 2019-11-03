@@ -53,7 +53,7 @@ define([
         } else {
           sect.html(progressbar());
 
-          $.post(`https://api.start.ng/api/login`, {
+          $.post(`${api}/api/login`, {
             email,
             password
           })
@@ -62,13 +62,7 @@ define([
               if (status == true) {
                 sessionStorage.setItem("user", JSON.stringify(user));
                 sessionStorage.setItem("user_token", token);
-                setTimeout(function() {
-                  if (user.role == "superadmin") {
-                    router.go("admin_dashboard");
-                  } else {
-                    router.go("dashboard");
-                  }
-                }, 0);
+                redirect_user(user.role);
               }
             })
             .fail(() => {
@@ -79,10 +73,20 @@ define([
         sect.html(feedback("Enter your details to login"));
       }
     };
-
+    function redirect_user(role) {
+      setTimeout(function() {
+        if (role == "superadmin") {
+          router.go("admin_dashboard");
+        } else {
+          router.go("user_dashboard");
+        }
+      }, 0);
+    }
     self.connected = function() {
       if (sessionStorage.getItem("user_token") !== null) {
-        router.go("dashboard");
+        let user = sessionStorage.getItem("user");
+        user = JSON.parse(user);
+        redirect_user(user.role);
       }
     };
 

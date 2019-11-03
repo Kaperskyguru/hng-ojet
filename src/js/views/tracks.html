@@ -1,162 +1,81 @@
-<style>
-    .grid-parent {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
-        grid-gap: 20px;
-    }
-
-    /* TRACKS CSS */
-
-    #tracks .shadow {
-
-        height: 172px;
-
-        max-width: 100%;
-        background: #FFFFFF;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 10px;
-    }
-
-    #tracks .grid-child h2 {
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 30px;
-        color: #5882BE;
-        padding-top: 15px
-    }
-
-    #tracks .grid-child h6 {
-        font-style: normal;
-        font-weight: 300;
-        font-size: 15px;
-        line-height: 24px;
-        color: #768093;
-    }
-
-    #tracks .grid-child .icons {
-        height: 30px;
-        color: #eee;
-        border-bottom-right-radius: 10px;
-        border-bottom-left-radius: 10px;
-        background: #768093;
-    }
-</style>
-<div class="container-fluid" id="tracks" style="">
-    <div class="oj-hybrid-padding">
-        <div class="grid-parent justify-content-center text-center">
-            <div class="grid-child shadow" style=" background:#fff;">
-                <div>
-                    <h2>Design</h2>
-                    <h6>11 members</h6>
-                    <h6>5 tutors</h6>
-                    <h6>7 Projects</h6>
-                </div>
-                <div class="icons">
-                    <span class="fa fa-pencil fa-2x mr-3"></span>
-                    <span class="fa fa-play fa-2x"></span>
-                </div>
-            </div>
-            <div class="grid-child shadow" style="background:#fff">
-                <div>
-                    <h2>Frontend</h2>
-                    <h6>11 members</h6>
-                    <h6>5 tutors</h6>
-                    <h6>7 Projects</h6>
-                </div>
-                <div class="icons">
-                    <span class="fa fa-pencil fa-2x mr-3"></span>
-                    <span class="fa fa-play fa-2x"></span>
-                </div>
-            </div>
-            <div class="grid-child shadow" style="background:#fff">
-                <div>
-                    <h2>Backend</h2>
-                    <h6>11 members</h6>
-                    <h6>5 tutors</h6>
-                    <h6>7 Projects</h6>
-                </div>
-                <div class="icons">
-                    <span class="fa fa-pencil fa-2x mr-3"></span>
-                    <span class="fa fa-play fa-2x"></span>
-                </div>
-            </div>
-
-            <div class="grid-child shadow" style=" background:#fff;">
-                <div>
-                    <h2>React</h2>
-                    <h6>11 members</h6>
-                    <h6>5 tutors</h6>
-                    <h6>7 Projects</h6>
-                </div>
-                <div class="icons">
-                    <span class="fa fa-pencil fa-2x mr-3"></span>
-                    <span class="fa fa-play fa-2x"></span>
-                </div>
-            </div>
-            <div class="grid-child shadow" style="background:#fff">
-                <div>
-                    <h2>Android</h2>
-                    <h6>11 members</h6>
-                    <h6>5 tutors</h6>
-                    <h6>7 Projects</h6>
-                </div>
-                <div class="icons">
-                    <span class="fa fa-pencil fa-2x mr-3"></span>
-                    <span class="fa fa-play fa-2x"></span>
-                </div>
-            </div>
-            <div class="grid-child shadow" style="background:#fff">
-                <div>
-                    <h2>PHP</h2>
-                    <h6>11 members</h6>
-                    <h6>5 tutors</h6>
-                    <h6>7 Projects</h6>
-                </div>
-                <div class="icons">
-                    <span class="fa fa-pencil fa-2x mr-3"></span>
-                    <span class="fa fa-play fa-2x"></span>
-                </div>
-            </div>
-
-
-            <div class="grid-child shadow" style=" background:#fff;">
-                <div>
-                    <h2>Java</h2>
-                    <h6>11 members</h6>
-                    <h6>5 tutors</h6>
-                    <h6>7 Projects</h6>
-                </div>
-                <div class="icons">
-                    <span class="fa fa-pencil fa-2x mr-3"></span>
-                    <span class="fa fa-play fa-2x"></span>
-                </div>
-            </div>
-            <div class="grid-child shadow" style="background:#fff">
-                <div>
-                    <h2>Videography</h2>
-                    <h6>11 members</h6>
-                    <h6>5 tutors</h6>
-                    <h6>7 Projects</h6>
-                </div>
-                <div class="icons">
-                    <span class="fa fa-pencil fa-2x mr-3"></span>
-                    <span class="fa fa-play fa-2x"></span>
-                </div>
-            </div>
-            <div class="grid-child shadow" style="background:#fff">
-                <div>
-                    <h2>Developers</h2>
-                    <h6>11 members</h6>
-                    <h6>5 tutors</h6>
-                    <h6>7 Projects</h6>
-                </div>
-                <div class="icons">
-                    <span class="fa fa-pencil fa-2x mr-3"></span>
-                    <span class="fa fa-play fa-2x"></span>
-                </div>
-            </div>
-
+<div class="oj-flex oj-sm-justify-content-center">
+    <div class="col-sm-12 col-md-11">
+        <div>
+            <p class="btn btn-info mt-2 float-right" data-bind="click: showCreateTrack">
+                <i class="fa fa-plus mr-2"></i>New Track</p>
         </div>
+        <div class="clearfix"></div>
+
+        <oj-list-view id="listview" class="mx-auto overflow-hidden bg-light p-0" aria-label="listview with paging control" data="[[dataProvider]]" selected="{{selectedItems}}" selection-required="[[selectedSelectionRequired]]" selection-mode="multiple" on-selected-changed="[[handleSelectionChanged]]"
+            on-current-item-changed="[[handleCurrentItemChanged]]" first-selected-item="{{firstSelectedItem}}">
+            <template slot="itemTemplate" data-oj-as="item">
+        <!-- template for items -->
+        <div class="p-2 border rounded bg-light" style="width: 100%; color: #4e5769 !important">
+                <i class="fa fa-pencil pencil float-right mt-2" data-bind="click: showEditTrack"></i><i class="fa fa-trash trash float-right mt-2" data-bind="click: showDeleteTrack"></i>
+              <h5><span class="badge badge-pill badge-info ml-2 mt-2 p-2">
+                <oj-bind-text value="[[item.data.track_name]]"></oj-bind-text></span>
+              </h5>
+              <p class="ml-2 mb-2 text-capitalize">
+                <oj-bind-text value="[[item.data.track_description]]"></oj-bind-text>
+              </p>
+              <i class="oj-fwk-icon oj-fwk-icon-calendar mr-2 mt-2 pl-2 pb-2"></i>
+              <span class="mb-0 mt-2 pb-2" data-bind="text: 'Created: ' + formatDateTime(item.data.created_at)"></span>
+            </div>
+    </template>
+        </oj-list-view>
+        <oj-paging-control id="paging" data="[[dataProvider]]" page-size="5" slot="bottom">
+        </oj-paging-control>
+
+
+
+        <!-- create new  track modal -->
+        <oj-dialog id="createTrack" style="display:none" title="Create New Track">
+            <div slot="body">
+                <oj-label class="oj-label oj-label-inline" for="createNewTitle">Title</oj-label>
+                <oj-input-text id="createNewTitle" value='{{newTrack.track_name}}'></oj-input-text>
+                <oj-label class="oj-label oj-label-inline" for="createNewDesc">Description</oj-label>
+                <oj-input-text id="createNewDesc" value="{{newTrack.track_description}}"></oj-input-text>
+            </div>
+            <div slot="footer">
+                <oj-button id="submitBtn" on-oj-action="[[createTrack]]">Submit</oj-button>
+            </div>
+        </oj-dialog>
+
+        <!-- update track modal, if track is selected -->
+
+        <oj-dialog id="editTrack" style="display:none" title="Update track Details">
+            <div slot="body">
+                <oj-label class="oj-label oj-label-inline" for="newName">Title</oj-label>
+                <oj-input-text id="newName" value='{{trackData().track_name}}'></oj-input-text>
+                <oj-label class="oj-label oj-label-inline" for="newDesc">Description</oj-label>
+                <oj-input-text id="newDesc" value="{{trackData().track_description}}"></oj-input-text>
+            </div>
+            <div slot="footer">
+                <oj-button id="submitBtn" on-oj-action="[[editTrack]]">Update
+                </oj-button>
+            </div>
+        </oj-dialog>
+        <!-- delete track modal -->
+        <oj-dialog id="deleteTrack" style="display:none" title="Delete track">
+            <div slot="body">
+                <p>Confirm you want to delete the track <span data-bind="text: trackData().track_name"></span>?</p>
+            </div>
+            <div slot="footer">
+                <oj-button id="submitBtn" on-oj-action="[[deleteTrack]]">Delete
+                </oj-button>
+            </div>
+        </oj-dialog>
+
     </div>
 </div>
+
+<!-- Start Messages Component -->
+
+<oj-messages id="application-messages" messages="{{applicationMessages}}" display="notification" position='{
+      "my": {"vertical" : "bottom", "horizontal": "end"},
+      "at": {"vertical": "bottom", "horizontal": "end"},
+      "of": "window"
+      }'>
+</oj-messages>
+
+<!-- End Messages Component -->

@@ -1,7 +1,14 @@
 node_modules
-/bower_components
-web
+bower_components/*
 /themes
+/web
+web
+web/*
+.vscode
+.idea
+manifest.json
+sw.js
+
 
 /hybrid/node_modules
 /hybrid/platforms
@@ -13,4 +20,5 @@ hybrid/plugins/*
 
 .DS_Store
 Thumbs.db
-hng.code-workspace
+ojet_frontend.code-workspace
+src/js/viewModels/api.js
